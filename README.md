@@ -22,11 +22,16 @@ PART ONE
 *   [DHT11](https://amzn.to/2Qs9fcV) Temp & Humidity Sensor
 *   [10k Ohm resistor](https://amzn.to/2Qo7vkW)
 
-🚀APPS
+APPS
 ------
 
 *   [PlatformIO](https://platformio.org/)
 *   [AWS cli](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
+
+Libraries
+---------
+*   [DHT](https://github.com/MecaHumArduino/arduino-uno-aws-weather-station/blob/master/lib/DHT.zip)
+*   [LiquidCrystal](https://github.com/MecaHumArduino/arduino-uno-aws-weather-station/blob/master/lib/LiquidCrystal.zip)
 
 What is humidity?
 -----------------
