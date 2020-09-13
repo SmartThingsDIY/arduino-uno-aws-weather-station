@@ -32,9 +32,8 @@ What is humidity?
 -----------------
 Humidity is the water vapor around you mixed with air. It is measured in %. So, if the humidity is 60%, then 60% of the air around you is water vapor. If it is 100%, then it means either the sensor is not correct, the sensor is broken/damaged, the Arduino crashed, the Arduino can't receive any signal, there's an error in the code or you're underwater(1). If it's 0%, it means all the reasons above except the last one, you're in space or you're in the middle of a desert(2).
 
-(1) Correction: it means the air cannot hold any more water.<br><br>
-
-(2) The air in a desert does contain some water but it is a very little amount compared to a normal place. The Sahara Desert has a mean humidity of 25%.</p>
+(1) Correction: it means the air cannot hold any more water.
+(2) The air in a desert does contain some water but it is a very little amount compared to a normal place. The Sahara Desert has a mean humidity of 25%.
 
 <img align="right" src="https://github.com/MecaHumArduino/arduino-uno-aws-weather-station/blob/master/docs/dht11.jpeg?raw=true" style="max-width:100%;" height="350">
 
