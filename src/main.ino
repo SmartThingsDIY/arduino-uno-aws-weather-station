@@ -8,6 +8,9 @@ dht11 sensor;
 
 // initialize the library with the numbers of the interface pins
 LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
+
+// ESP TX => Uno Pin 2
+// ESP RX => Uno Pin 3
 SoftwareSerial wifi(2, 3);
 
 void setup() {
