@@ -11,7 +11,7 @@ SoftwareSerial WiFiBoard(2, 3);
 
 void setup() {
   Serial.begin(9600);
-  WiFiBoard.begin(115200);
+  WiFiBoard.begin(9600);
 
   // set up the LCD's number of columns and rows
   lcd.begin(16, 2);
@@ -31,6 +31,10 @@ void setup() {
 }
 
 void loop() {
+  // Serial.println("checking ESP responses");
+  while (WiFiBoard.available()) {
+    Serial.println(WiFiBoard.read());
+  }
 
   // read from the digital pin
   int   check       = sensor.read(DHT11PIN);
@@ -47,22 +51,7 @@ void loop() {
   lcd.print("Temp (C): ");
   lcd.print(temperature, 2);
 
-  // print Hum on the serial monitor
-  Serial.print("Humidity (%): ");
-  Serial.println(humidity, 2);
+  Serial.print("{\"Humidity\":\"" + (String)humidity + "\", \"Temperature\":\"" + (String)temperature + "\"}");
 
-  // print Temp on the serial monitor
-  Serial.print("Temperature (C): ");
-  Serial.println(temperature, 2);
-
-  // sendDataToWiFiBoard(temperature, humidity);
-
-  WiFiBoard.println(111);
-  WiFiBoard.write(111);
   delay(2000); // take measurements every 2 sec
-}
-
-void sendDataToWiFiBoard(float temperature, float humidity)
-{
-  WiFiBoard.println(temperature);
 }
