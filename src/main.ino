@@ -7,6 +7,7 @@
 
 #include <dht11.h>
 #include <LiquidCrystal.h>
+#include <ArduinoJson.h> //https://github.com/bblanchon/ArduinoJson (use v6.xx)
 #include <SoftwareSerial.h>
 
 #define DEBUG true
@@ -87,13 +88,16 @@ void loop() {
 
 String prepareDataForWiFi(float humidity, float temperature)
 {
-  String dataAsJson = "{\"Humidity\":\"";
-  dataAsJson += (String)humidity;
-  dataAsJson += "\", \"Temperature\":\"";
-  dataAsJson += (String)temperature;
-  dataAsJson += "\"}";
 
-  return dataAsJson;
+  StaticJsonDocument<200> doc;
+
+  doc["humidity"]    = (String)humidity;
+  doc["temperature"] = (String)temperature;
+
+  char jsonBuffer[512];
+  serializeJson(doc, jsonBuffer);
+
+  return jsonBuffer;
 }
 
 String sendDataToWiFi(String command, const int timeout, boolean debug)
