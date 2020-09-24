@@ -2,16 +2,17 @@
 #include <LiquidCrystal.h>
 #include <SoftwareSerial.h>
 
+#define DEBUG true
 #define DHT11PIN 4
 dht11 sensor;
 
 // initialize the library with the numbers of the interface pins
 LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
-SoftwareSerial WiFiBoard(2, 3);
+SoftwareSerial wifi(2, 3);
 
 void setup() {
   Serial.begin(9600);
-  WiFiBoard.begin(9600);
+  wifi.begin(9600);
 
   // set up the LCD's number of columns and rows
   lcd.begin(16, 2);
@@ -31,10 +32,22 @@ void setup() {
 }
 
 void loop() {
-  // Serial.println("checking ESP responses");
-  while (WiFiBoard.available()) {
-    Serial.println(WiFiBoard.read());
+
+  Serial.print("buffer: ");
+  if (wifi.available()) {
+    String espBuf;
+    long int time = millis();
+
+    while( (time+1000) > millis()) {
+      while (wifi.available()) {
+        // The esp has data so display its output to the serial window
+        char c = wifi.read(); // read the next character.
+        espBuf += c;
+      }
+    }
+    Serial.print(espBuf);
   }
+  Serial.println(" endbuffer");
 
   // read from the digital pin
   int   check       = sensor.read(DHT11PIN);
@@ -51,7 +64,39 @@ void loop() {
   lcd.print("Temp (C): ");
   lcd.print(temperature, 2);
 
-  Serial.print("{\"Humidity\":\"" + (String)humidity + "\", \"Temperature\":\"" + (String)temperature + "\"}");
+  // const char DATA_TO_SEND[] = "{\"Humidity\":\"" + (String)humidity + "\", \"Temperature\":\"" + (String)temperature + "\"} ";
+
+
+  String sensorData = "{\"Humidity\":\"";
+  sensorData += (String)humidity;
+  sensorData += "\", \"Temperature\":\"";
+  sensorData += (String)temperature;
+  sensorData += "\"}";
+  sensorData += "\r\n";
+
+  Serial.println(sensorData);
+  sendDataToWiFi(sensorData, 1000, DEBUG);
 
   delay(2000); // take measurements every 2 sec
+}
+
+String sendDataToWiFi(String command, const int timeout, boolean debug)
+{
+    String response = "";
+
+    wifi.print(command); // send the read character to the esp8266
+
+    long int time = millis();
+
+    while((time+timeout) > millis()) {
+      while(wifi.available()) {
+        // The esp has data so display its output to the serial window
+        char c = wifi.read(); // read the next character.
+        response+=c;
+      }
+    }
+
+    Serial.print(response);
+
+    return response;
 }
