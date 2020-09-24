@@ -1,3 +1,10 @@
+/**
+  Reads data from a DHT11 sensor, displays it on an LCD screen and at the same time
+  sends it through pins 2 and 3 to a connected ESP8266 ESP-01 WiFi module
+  @author MecaHumArduino
+  @version 3.0
+*/
+
 #include <dht11.h>
 #include <LiquidCrystal.h>
 #include <SoftwareSerial.h>
@@ -36,70 +43,78 @@ void setup() {
 
 void loop() {
 
-  Serial.print("buffer: ");
-  if (wifi.available()) {
-    String espBuf;
-    long int time = millis();
+  if (DEBUG == true) {
+    Serial.print("buffer: ");
+    if (wifi.available()) {
+      String espBuf;
+      long int time = millis();
 
-    while( (time+1000) > millis()) {
-      while (wifi.available()) {
-        // The esp has data so display its output to the serial window
-        char c = wifi.read(); // read the next character.
-        espBuf += c;
+      while( (time+1000) > millis()) {
+        while (wifi.available()) {
+          // The esp has data so display its output to the serial window
+          char c = wifi.read(); // read the next character.
+          espBuf += c;
+        }
       }
+      Serial.print(espBuf);
     }
-    Serial.print(espBuf);
+    Serial.println(" endbuffer");
   }
-  Serial.println(" endbuffer");
 
   // read from the digital pin
   int   check       = sensor.read(DHT11PIN);
   float temperature = (float)sensor.temperature;
   float humidity    = (float)sensor.humidity;
 
-  // display Hum on the LCD screen
+  // display Humidity on the LCD screen
   lcd.setCursor(0, 0);
   lcd.print("Humidity (%): ");
   lcd.print(humidity, 2);
 
-  // display Temp on the LCD screen
+  // display Temperature on the LCD screen
   lcd.setCursor(0, 1);
   lcd.print("Temp (C): ");
   lcd.print(temperature, 2);
 
-  // const char DATA_TO_SEND[] = "{\"Humidity\":\"" + (String)humidity + "\", \"Temperature\":\"" + (String)temperature + "\"} ";
-
-
-  String sensorData = "{\"Humidity\":\"";
-  sensorData += (String)humidity;
-  sensorData += "\", \"Temperature\":\"";
-  sensorData += (String)temperature;
-  sensorData += "\"}";
-  sensorData += "\r\n";
-
-  Serial.println(sensorData);
-  sendDataToWiFi(sensorData, 1000, DEBUG);
+  String preparedData = prepareDataForWiFi(humidity, temperature);
+  if (DEBUG == true) {
+    Serial.println(preparedData);
+  }
+  sendDataToWiFi(preparedData, 1000, DEBUG);
 
   delay(2000); // take measurements every 2 sec
 }
 
+String prepareDataForWiFi(float humidity, float temperature)
+{
+  String dataAsJson = "{\"Humidity\":\"";
+  dataAsJson += (String)humidity;
+  dataAsJson += "\", \"Temperature\":\"";
+  dataAsJson += (String)temperature;
+  dataAsJson += "\"}";
+
+  return dataAsJson;
+}
+
 String sendDataToWiFi(String command, const int timeout, boolean debug)
 {
-    String response = "";
+  String response = "";
 
-    wifi.print(command); // send the read character to the esp8266
+  wifi.print(command); // send the read character to the esp8266
 
-    long int time = millis();
+  long int time = millis();
 
-    while((time+timeout) > millis()) {
-      while(wifi.available()) {
-        // The esp has data so display its output to the serial window
-        char c = wifi.read(); // read the next character.
-        response+=c;
-      }
+  while((time+timeout) > millis()) {
+    while(wifi.available()) {
+      // The esp has data so display its output to the serial window
+      char c = wifi.read(); // read the next character.
+      response+=c;
     }
+  }
 
+  if (debug) {
     Serial.print(response);
+  }
 
-    return response;
+  return response;
 }
