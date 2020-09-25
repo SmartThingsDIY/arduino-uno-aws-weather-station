@@ -1,0 +1,7 @@
+{
+  "name": "uno-weather-station-writer",
+  "version": "1.0.0",
+  "main": "handler.js",
+  "author": "MecaHumArduino",
+  "license": "Apache"
+}

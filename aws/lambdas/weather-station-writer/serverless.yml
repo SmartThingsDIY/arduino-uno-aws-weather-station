@@ -1,0 +1,28 @@
+# Happy Coding!
+
+service: weather-station-writer
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: us-east-1
+  profile: iot
+  environment:
+    DYNAMODB_TABLE_NAME: !ImportValue WeatherStationAnalyticsTableName
+    DYNAMODB_TABLE_ARN: !ImportValue WeatherStationAnalyticsTableARN
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:*
+      Resource:
+      - ${self:provider.environment.DYNAMODB_TABLE_ARN}
+
+functions:
+  process:
+    handler: handler.process
+    reservedConcurrency: 5
+    versionFunctions: false # optional, default is true
+    memory: 512
+    timeout: 2
+    tags:
+      project: uno-weather-station
