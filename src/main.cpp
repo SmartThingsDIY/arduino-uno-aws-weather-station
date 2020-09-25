@@ -6,15 +6,17 @@
 */
 
 #include <Arduino.h>
-#include <dht11.h>
+#include <DHT.h>
 #include <LiquidCrystal.h>
 #include <ArduinoJson.h> //https://github.com/bblanchon/ArduinoJson (use v6.xx)
 #include <SoftwareSerial.h>
 
 #define DEBUG true
-#define DHT11PIN 4
 
-dht11 sensor;
+#define DHT_PIN 4 // pin connected to data pin of DHT11
+#define DHT_TYPE DHT11  // Type of the DHT Sensor, DHT11/DHT22
+
+DHT sensor(DHT_PIN, DHT_TYPE);
 
 // initialize the library with the numbers of the interface pins
 LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
@@ -24,18 +26,20 @@ LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
 SoftwareSerial wifi(2, 3);
 
 // declaring custom function to follow C++ validation rules
-String prepareDataForWiFi(float humidity, float temperature);
+// **************
 String sendDataToWiFi(String command, const int timeout, boolean debug);
 String sendDataToWiFi(String command, const int timeout, boolean debug);
+String prepareDataForWiFi(float humidity, float temperature, float headIndex);
+// **************
 
-
-String prepareDataForWiFi(float humidity, float temperature)
+String prepareDataForWiFi(float humidity, float temperature, float headIndex)
 {
 
   StaticJsonDocument<200> doc;
 
-  doc["humidity"]    = (String)humidity;
-  doc["temperature"] = (String)temperature;
+  doc["humidity"]    = String(humidity);
+  doc["temperature"] = String(temperature);
+  doc["head_index"]  = String(headIndex);
 
   char jsonBuffer[512];
   serializeJson(doc, jsonBuffer);
@@ -108,25 +112,34 @@ void loop() {
   }
 
   // read from the digital pin
-  int   check       = sensor.read(DHT11PIN);
-  float temperature = (float)sensor.temperature;
-  float humidity    = (float)sensor.humidity;
+  sensor.begin();
 
-  // display Humidity on the LCD screen
-  lcd.setCursor(0, 0);
-  lcd.print("Humidity (%): ");
-  lcd.print(humidity, 2);
+  float temperature = sensor.readTemperature(); // return temperature in °C
+  float humidity    = sensor.readHumidity(); // return humidity in %
 
-  // display Temperature on the LCD screen
-  lcd.setCursor(0, 1);
-  lcd.print("Temp (C): ");
-  lcd.print(temperature, 2);
+  // Compute heat index in Celsius (isFahrenheit = false)
+  float heatIndex   = sensor.computeHeatIndex(temperature, humidity, false);
 
-  String preparedData = prepareDataForWiFi(humidity, temperature);
-  if (DEBUG == true) {
-    Serial.println(preparedData);
+  // check whether reading was successful or not
+  if (temperature == NAN || humidity == NAN) { // NAN means no available data
+    lcd.print("Reading failed.");
+  } else {
+    // display Humidity on the LCD screen
+    lcd.setCursor(0, 0);
+    lcd.print("Humidity (%): ");
+    lcd.print(String(humidity));
+
+    // display Temperature on the LCD screen
+    lcd.setCursor(0, 1);
+    lcd.print("Temp (C): ");
+    lcd.print(String(temperature));
+
+    String preparedData = prepareDataForWiFi(humidity, temperature, heatIndex);
+    if (DEBUG == true) {
+      Serial.println(preparedData);
+    }
+    sendDataToWiFi(preparedData, 1000, DEBUG);
   }
-  sendDataToWiFi(preparedData, 1000, DEBUG);
 
   delay(2000); // take measurements every 2 sec
 }
