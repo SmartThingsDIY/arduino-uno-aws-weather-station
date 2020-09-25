@@ -5,6 +5,7 @@
   @version 3.0
 */
 
+#include <Arduino.h>
 #include <dht11.h>
 #include <LiquidCrystal.h>
 #include <ArduinoJson.h> //https://github.com/bblanchon/ArduinoJson (use v6.xx)
@@ -20,6 +21,49 @@ LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
 // ESP TX => Uno Pin 2
 // ESP RX => Uno Pin 3
 SoftwareSerial wifi(2, 3);
+
+// declaring custom function to follow C++ validation rules
+String prepareDataForWiFi(float humidity, float temperature);
+String sendDataToWiFi(String command, const int timeout, boolean debug);
+String sendDataToWiFi(String command, const int timeout, boolean debug);
+
+
+String prepareDataForWiFi(float humidity, float temperature)
+{
+
+  StaticJsonDocument<200> doc;
+
+  doc["humidity"]    = (String)humidity;
+  doc["temperature"] = (String)temperature;
+
+  char jsonBuffer[512];
+  serializeJson(doc, jsonBuffer);
+
+  return jsonBuffer;
+}
+
+String sendDataToWiFi(String command, const int timeout, boolean debug)
+{
+  String response = "";
+
+  wifi.print(command); // send the read character to the esp8266
+
+  long int time = millis();
+
+  while((time+timeout) > millis()) {
+    while(wifi.available()) {
+      // The esp has data so display its output to the serial window
+      char c = wifi.read(); // read the next character.
+      response+=c;
+    }
+  }
+
+  if (debug) {
+    Serial.print(response);
+  }
+
+  return response;
+}
 
 void setup() {
   Serial.begin(9600);
@@ -84,41 +128,4 @@ void loop() {
   sendDataToWiFi(preparedData, 1000, DEBUG);
 
   delay(2000); // take measurements every 2 sec
-}
-
-String prepareDataForWiFi(float humidity, float temperature)
-{
-
-  StaticJsonDocument<200> doc;
-
-  doc["humidity"]    = (String)humidity;
-  doc["temperature"] = (String)temperature;
-
-  char jsonBuffer[512];
-  serializeJson(doc, jsonBuffer);
-
-  return jsonBuffer;
-}
-
-String sendDataToWiFi(String command, const int timeout, boolean debug)
-{
-  String response = "";
-
-  wifi.print(command); // send the read character to the esp8266
-
-  long int time = millis();
-
-  while((time+timeout) > millis()) {
-    while(wifi.available()) {
-      // The esp has data so display its output to the serial window
-      char c = wifi.read(); // read the next character.
-      response+=c;
-    }
-  }
-
-  if (debug) {
-    Serial.print(response);
-  }
-
-  return response;
 }
