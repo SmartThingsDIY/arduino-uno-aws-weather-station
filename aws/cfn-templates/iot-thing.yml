@@ -35,7 +35,7 @@ Resources:
         Description: 'Send IoT Device data in raw format to a Lambda function'
         AwsIotSqlVersion: '2016-03-23'
         RuleDisabled: false
-        Sql: 'SELECT *, parse_time("yyyy-MM-dd HH:mm:ss", timestamp()) as ts FROM "WeatherStationTopic"'
+        Sql: 'SELECT *, parse_time("yyyy-MM-dd HH:mm:ss", timestamp()) as ts FROM "$aws/things/weatherstation/shadow/pub"'
         Actions:
           - Lambda:
               FunctionArn: !Sub 'arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:weather-station-writer-dev-process'
