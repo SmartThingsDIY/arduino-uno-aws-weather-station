@@ -13,6 +13,7 @@
 
 #define DEBUG true
 #define DHT11PIN 4
+
 dht11 sensor;
 
 // initialize the library with the numbers of the interface pins
