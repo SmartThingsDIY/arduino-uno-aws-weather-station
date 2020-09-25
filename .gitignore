@@ -4,3 +4,5 @@
 .vscode/launch.json
 .vscode/ipch
 .DS_Store
+aws/lambdas/weather-station-writer/.serverless
+aws/cfn-templates/real-time-iot-device-monitoring-with-kinesis.template

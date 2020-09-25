@@ -1,0 +1,72 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: "weather station IoT Thing"
+
+Outputs:
+
+  WeatherStationAnalyticsTableName:
+    Value: !Ref WeatherStationAnalyticsTable
+    Export:
+      Name: WeatherStationAnalyticsTableName
+  WeatherStationAnalyticsTableARN:
+    Value: !GetAtt WeatherStationAnalyticsTable.Arn
+    Export:
+      Name: WeatherStationAnalyticsTableARN
+
+Resources:
+  WeatherStationThing:
+    Type: AWS::IoT::Thing
+    Properties:
+      ThingName: weatherstation
+
+  WeatherStationMetricsLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      RetentionInDays: 7
+
+  WeatherStationMetricsLogStream:
+    Type: AWS::Logs::LogStream
+    Properties:
+      LogGroupName: !Ref WeatherStationMetricsLogGroup
+
+  WeatherStationTopicRule:
+    Type: AWS::IoT::TopicRule
+    Properties:
+      TopicRulePayload:
+        Description: 'Send IoT Device data in raw format to a Lambda function'
+        AwsIotSqlVersion: '2016-03-23'
+        RuleDisabled: false
+        Sql: 'SELECT *, parse_time("yyyy-MM-dd HH:mm:ss", timestamp()) as ts FROM "WeatherStationTopic"'
+        Actions:
+          - Lambda:
+              FunctionArn: !Sub 'arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:weather-station-writer-dev-process'
+
+  WeatherStationPolicy:
+    Type: AWS::IoT::Policy
+    Properties:
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Action:
+              - iot:Connect
+              - iot:Subscribe
+              - iot:Receive
+              - iot:Publish
+            Resource:
+              - '*'
+      PolicyName: weatherstationPolicy
+
+  WeatherStationAnalyticsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: weather-station
+      AttributeDefinitions:
+      - AttributeName: "time"
+        AttributeType: "S"
+      KeySchema:
+      - AttributeName: "time"
+        KeyType: HASH
+      BillingMode: "PAY_PER_REQUEST"
+      Tags:
+        - Key: project
+          Value: weather-station
