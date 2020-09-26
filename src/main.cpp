@@ -27,7 +27,7 @@ SoftwareSerial wifi(2, 3);
 
 // **************
 String sendDataToWiFi(String command, const int timeout, boolean debug);
-String prepareDataForWiFi(float humidity, float temperature, float headIndex);
+String prepareDataForWiFi(float humidity, float temperature, float heatIndex);
 void setup();
 void loop();
 // **************
@@ -36,16 +36,16 @@ void loop();
  * Build and return a JSON document from the sensor data
  * @param humidity
  * @param temperature
- * @param headIndex
+ * @param heatIndex
  * @return
  */
-String prepareDataForWiFi(float humidity, float temperature, float headIndex)
+String prepareDataForWiFi(float humidity, float temperature, float heatIndex)
 {
   StaticJsonDocument<200> doc;
 
   doc["humidity"]    = String(humidity);
   doc["temperature"] = String(temperature);
-  doc["head_index"]  = String(headIndex);
+  doc["heat_index"]  = String(heatIndex);
 
   char jsonBuffer[512];
   serializeJson(doc, jsonBuffer);
@@ -148,7 +148,7 @@ void loop() {
 
     String preparedData = prepareDataForWiFi(humidity, temperature, heatIndex);
     if (DEBUG == true) {
-      Serial.println(preparedData);
+      // Serial.println(preparedData);
     }
     sendDataToWiFi(preparedData, 1000, DEBUG);
   }

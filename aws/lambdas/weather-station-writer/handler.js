@@ -9,10 +9,10 @@ module.exports.process = async event => {
   var params = {
     TableName: process.env.DYNAMODB_TABLE_NAME,
     Item: {
-      time      : event.time,
-      temp      : event.temp,
-      humidity  : event.humidity,
-      heat_index: event.heat_index
+      time       : event.time,
+      temperature: event.temperature,
+      humidity   : event.humidity,
+      heat_index : event.heat_index
     }
   };
 
