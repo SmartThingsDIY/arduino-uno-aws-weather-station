@@ -59,7 +59,7 @@ Resources:
   WeatherStationAnalyticsTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: weather-station
+      TableName: weather-station-data
       AttributeDefinitions:
       - AttributeName: "time"
         AttributeType: "S"

@@ -148,7 +148,7 @@ void loop() {
 
     String preparedData = prepareDataForWiFi(humidity, temperature, heatIndex);
     if (DEBUG == true) {
-      // Serial.println(preparedData);
+      Serial.println(preparedData);
     }
     sendDataToWiFi(preparedData, 1000, DEBUG);
   }
