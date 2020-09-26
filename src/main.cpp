@@ -28,13 +28,20 @@ SoftwareSerial wifi(2, 3);
 // declaring custom function to follow C++ validation rules
 // **************
 String sendDataToWiFi(String command, const int timeout, boolean debug);
-String sendDataToWiFi(String command, const int timeout, boolean debug);
 String prepareDataForWiFi(float humidity, float temperature, float headIndex);
+void setup();
+void loop();
 // **************
 
+/**
+ * Build and return a JSON document from the sensor data
+ * @param humidity
+ * @param temperature
+ * @param headIndex
+ * @return
+ */
 String prepareDataForWiFi(float humidity, float temperature, float headIndex)
 {
-
   StaticJsonDocument<200> doc;
 
   doc["humidity"]    = String(humidity);
@@ -46,7 +53,13 @@ String prepareDataForWiFi(float humidity, float temperature, float headIndex)
 
   return jsonBuffer;
 }
-
+/**
+ * Send data through Serial to ESP8266 module
+ * @param command
+ * @param timeout
+ * @param debug
+ * @return
+ */
 String sendDataToWiFi(String command, const int timeout, boolean debug)
 {
   String response = "";
@@ -99,7 +112,7 @@ void loop() {
       String espBuf;
       long int time = millis();
 
-      while( (time+1000) > millis()) {
+      while((time+1000) > millis()) {
         while (wifi.available()) {
           // The esp has data so display its output to the serial window
           char c = wifi.read(); // read the next character.
