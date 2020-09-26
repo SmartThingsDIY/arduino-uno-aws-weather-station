@@ -25,7 +25,6 @@ LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
 // ESP RX => Uno Pin 3
 SoftwareSerial wifi(2, 3);
 
-// declaring custom function to follow C++ validation rules
 // **************
 String sendDataToWiFi(String command, const int timeout, boolean debug);
 String prepareDataForWiFi(float humidity, float temperature, float headIndex);
