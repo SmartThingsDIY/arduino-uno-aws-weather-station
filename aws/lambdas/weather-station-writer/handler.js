@@ -7,7 +7,7 @@ module.exports.process = async event => {
   console.debug(JSON.stringify(event));
 
   var params = {
-    TableName: process.env.DYNAMODB_TABLE,
+    TableName: process.env.DYNAMODB_TABLE_NAME,
     Item: {
       time      : event.time,
       temp      : event.temp,
