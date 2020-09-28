@@ -76,3 +76,42 @@ ESP8266 ESP01 - Schematic Diagram
 The ESP8266 WiFi Module is a self-contained stack that can give any microcontroller access to your WiFi network. The ESP8266 is capable of either hosting an application or offloading all Wi-Fi networking functions from another application processor. The ESP8266 module is an extremely cost-effective board with a huge, and ever-growing, community.
 
 <img align="center" src="https://github.com/MecaHumArduino/arduino-uno-aws-weather-station/blob/master/docs/esp8266-schema.png?raw=true" style="max-width:100%;" height="350">
+
+Code Walk Through
+--------------------
+
+The code itself is straightforward and well commented (help is of course welcome) but I wanted to explain something I struggled with when I first was learning my way through the Arduino world, and that is the difference between `Software Serial` and `Hardware Serial`.
+
+Let's go through the function called `sendDataToWiFi()`. This function allow the Arduino board (the logic board) to communicate with the ESP8266 board (The WiFi board)
+
+```cpp
+String sendDataToWiFi(String command, const int timeout, boolean debug)
+```
+
+So after connecting the two boards following the wiring diagram above, and initializing a new Software Serial object called `wifi`
+```cpp
+// ESP TX => Uno Pin 2
+// ESP RX => Uno Pin 3
+SoftwareSerial wifi(2, 3);
+```
+
+Anything passed to the `print()` function will be sent through the pin 2 to the WiFi board.
+```cpp
+  wifi.print(command); // send the read character to the esp8266
+```
+
+Pin 3 is then used to read any response coming back from the WiFi board through the `read()` function.
+```cpp
+  while((time+timeout) > millis()) {
+    while(wifi.available()) {
+      // The esp has data so display its output to the serial window
+      char c = wifi.read(); // read the next character.
+      response+=c;
+    }
+  }
+
+  return response;
+}
+```
+
+Finally, for code that goes into the WiFi board (ESP8266 ESP01) and more explanation, please head out to this repo: https://github.com/MecaHumArduino/esp8266-01-aws-mqtt
