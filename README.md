@@ -36,8 +36,11 @@ APPS
 
 Libraries
 ---------
-*   [DHT](https://github.com/MecaHumArduino/arduino-uno-aws-weather-station/blob/master/lib/DHT.zip)
-*   [LiquidCrystal](https://github.com/MecaHumArduino/arduino-uno-aws-weather-station/blob/master/lib/LiquidCrystal.zip)
+*   [DHT](https://github.com/adafruit/DHT-sensor-library)
+*   [LiquidCrystal](https://www.arduino.cc/en/Reference/LiquidCrystal)
+*   [ArduinoJson](https://github.com/bblanchon/ArduinoJson)
+*   [SoftwareSerial](https://www.arduino.cc/en/Reference.SoftwareSerial)
+
 
 What is humidity?
 -----------------

@@ -8,7 +8,7 @@
 #include <Arduino.h>
 #include <DHT.h>
 #include <LiquidCrystal.h>
-#include <ArduinoJson.h> //https://github.com/bblanchon/ArduinoJson (use v6.xx)
+#include <ArduinoJson.h> // https://github.com/bblanchon/ArduinoJson (use v6.xx)
 #include <SoftwareSerial.h>
 
 #define DEBUG true
