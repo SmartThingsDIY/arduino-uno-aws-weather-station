@@ -14,18 +14,11 @@ This episode shows you how to use the [DHT11](https://amzn.to/2Qs9fcV) temperatu
 [**Video 2: Connecting the IoT Weather Station to AWS IoT using ESP8266**](https://youtu.be/aR3pAWPbU1Q)
 This episode builds on the previous one and continues forward by pushing the temperature & humidity data received through the [DHT11](https://amzn.to/2Qs9fcV) sensor, onto an AWS IoT account using an [ESP8266](https://amzn.to/3hqqWom) WiFi module.
 
-Video 1:              |  Video 2
-:-------------------------:|:-------------------------:
-[<img align="left" src="https://github.com/MecaHumArduino/arduino-uno-aws-weather-station/blob/master/docs/01.png?raw=true" style="max-width:100%;" height="300">](https://youtu.be/vL6TKYhjwQc) | [<img align="right" src="https://github.com/MecaHumArduino/arduino-uno-aws-weather-station/blob/master/docs/02.png?raw=true" style="max-width:100%;" height="300">](https://youtu.be/aR3pAWPbU1Q)
-
-<br /><br /><br />
-
 
 ⚡️ COMPONENTS AND SUPPLIES
 --------------------------
 
 <img align="right" src="https://store-cdn.arduino.cc/usa/catalog/product/cache/1/image/1000x750/f8876a31b63532bbba4e781c30024a0a/a/0/a000066_iso_1_3.jpg" style="max-width:100%;" height="300">
-
 
 *   [Arduino Uno](https://amzn.to/2RnHhPY)
 *   [LCD Screen](https://amzn.to/2FzJdT62Ehh2ru)
