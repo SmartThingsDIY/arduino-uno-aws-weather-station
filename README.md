@@ -14,8 +14,7 @@ This episode builds on the previous one and continues forward by pushing the tem
 
 [<img align="center" src="https://github.com/MecaHumArduino/arduino-uno-aws-weather-station/blob/master/docs/02.png?raw=true" style="max-width:100%;" height="350">](https://youtu.be/aR3pAWPbU1Q)
 
-PART ONE
-========
+
 
 ⚡️ COMPONENTS AND SUPPLIES
 --------------------------
@@ -33,14 +32,14 @@ PART ONE
 *   [ESP8266 ESP-01 programmable USB](https://amzn.to/345egi6)
 *   [ESP8266 ESP-01 Breadboard Adapter](https://amzn.to/3kSFVcP)
 
-APPS
+🖥 APPS
 ------
 
 *   [PlatformIO](https://platformio.org/)
 *   [Fritzing](https://fritzing.org/)
 *   [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
 
-Libraries
+📦 Libraries
 ---------
 *   [DHT](https://github.com/adafruit/DHT-sensor-library)
 *   [LiquidCrystal](https://www.arduino.cc/en/Reference/LiquidCrystal)
