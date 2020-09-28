@@ -26,7 +26,7 @@ LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
 SoftwareSerial wifi(2, 3);
 
 // **************
-String sendDataToWiFi(String command, const int timeout, boolean debug);
+String sendDataToWiFiBoard(String command, const int timeout, boolean debug);
 String prepareDataForWiFi(float humidity, float temperature, float heatIndex);
 void setup();
 void loop();
@@ -60,7 +60,7 @@ String prepareDataForWiFi(float humidity, float temperature, float heatIndex)
  * @param debug
  * @return
  */
-String sendDataToWiFi(String command, const int timeout, boolean debug)
+String sendDataToWiFiBoard(String command, const int timeout, boolean debug)
 {
   String response = "";
 
@@ -151,7 +151,7 @@ void loop() {
     if (DEBUG == true) {
       Serial.println(preparedData);
     }
-    sendDataToWiFi(preparedData, 1000, DEBUG);
+    sendDataToWiFiBoard(preparedData, 1000, DEBUG);
   }
 
   delay(2000); // take measurements every 2 sec
