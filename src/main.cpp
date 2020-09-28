@@ -25,28 +25,40 @@ LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
 // ESP RX => Uno Pin 3
 SoftwareSerial wifi(2, 3);
 
-// declaring custom function to follow C++ validation rules
 // **************
 String sendDataToWiFi(String command, const int timeout, boolean debug);
-String sendDataToWiFi(String command, const int timeout, boolean debug);
-String prepareDataForWiFi(float humidity, float temperature, float headIndex);
+String prepareDataForWiFi(float humidity, float temperature, float heatIndex);
+void setup();
+void loop();
 // **************
 
-String prepareDataForWiFi(float humidity, float temperature, float headIndex)
+/**
+ * Build and return a JSON document from the sensor data
+ * @param humidity
+ * @param temperature
+ * @param heatIndex
+ * @return
+ */
+String prepareDataForWiFi(float humidity, float temperature, float heatIndex)
 {
-
   StaticJsonDocument<200> doc;
 
   doc["humidity"]    = String(humidity);
   doc["temperature"] = String(temperature);
-  doc["head_index"]  = String(headIndex);
+  doc["heat_index"]  = String(heatIndex);
 
   char jsonBuffer[512];
   serializeJson(doc, jsonBuffer);
 
   return jsonBuffer;
 }
-
+/**
+ * Send data through Serial to ESP8266 module
+ * @param command
+ * @param timeout
+ * @param debug
+ * @return
+ */
 String sendDataToWiFi(String command, const int timeout, boolean debug)
 {
   String response = "";
@@ -99,7 +111,7 @@ void loop() {
       String espBuf;
       long int time = millis();
 
-      while( (time+1000) > millis()) {
+      while((time+1000) > millis()) {
         while (wifi.available()) {
           // The esp has data so display its output to the serial window
           char c = wifi.read(); // read the next character.
