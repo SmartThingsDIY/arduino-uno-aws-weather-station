@@ -19,13 +19,19 @@ PART ONE
 *   [LCD Screen](https://amzn.to/2FzJdT62Ehh2ru)
 *   [Breadboard](https://amzn.to/2Ei40tP)
 *   [Jumper Wires](https://amzn.to/2Ehh2ru)
-*   [DHT11](https://amzn.to/2Qs9fcV) Temp & Humidity Sensor
+*   [Male to Male Jumper Wires + Tweezer](https://amzn.to/3jcf9eX)
+*   [DHT11 Temp & Humidity Sensor](https://amzn.to/2Qs9fcV)
 *   [10k Ohm resistor](https://amzn.to/2Qo7vkW)
+*   [Hardware / Storage Cabinet Drawer](https://amzn.to/36ehDpB)
+*   [ESP8266 ESP-01 WiFi Module](https://amzn.to/30fUWNS)
+*   [ESP8266 ESP-01 programmable USB](https://amzn.to/345egi6)
+*   [ESP8266 ESP-01 Breakout Board Breadboard Adapter](https://amzn.to/3kSFVcP)
 
 APPS
 ------
 
 *   [PlatformIO](https://platformio.org/)
+*   [Fritzing](https://fritzing.org/)
 *   [AWS cli](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
 
 Libraries
