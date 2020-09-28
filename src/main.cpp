@@ -52,6 +52,7 @@ String prepareDataForWiFi(float humidity, float temperature, float heatIndex)
 
   return jsonBuffer;
 }
+
 /**
  * Send data through Serial to ESP8266 module
  * @param command
