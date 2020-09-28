@@ -1,4 +1,4 @@
-# Weather Station with Arduino Uno board, DHT11 Sensor, LCD screen and AWS IOT
+# Connected Weather Station with Arduino Uno board, DHT11 Sensor, LCD screen, ESP8266 WiFi module and AWS IOT
 
 This tutorial shows you how to use the [DHT11](https://amzn.to/2Qs9fcV) temperature and humidity sensors with the [Arduino Uno](https://amzn.to/2RnHhPY) board to build a simple weather station that displays current temperature and humidity on an [LCD](https://amzn.to/2FzJdT6) screen and pushes the data to AWS IoT through an [ESP8266](https://amzn.to/3hqqWom) board.
 
@@ -30,7 +30,7 @@ APPS
 
 *   [PlatformIO](https://platformio.org/)
 *   [Fritzing](https://fritzing.org/)
-*   [AWS cli](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
+*   [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
 
 Libraries
 ---------
@@ -42,7 +42,7 @@ Libraries
 
 What is humidity?
 -----------------
-Humidity is the water vapor around you mixed with air. It is measured in %. So, if the humidity is 60%, then 60% of the air around you is water vapor. If it is 100%, then it means either the sensor is not correct, the sensor is broken/damaged, the Arduino crashed, the Arduino can't receive any signal, there's an error in the code or you're underwater(1). If it's 0%, it means all the reasons above except the last one, you're in space or you're in the middle of a desert(2).
+Humidity is the water vapour around you mixed with air. It is measured in %. So, if the humidity is 60%, then 60% of the air around you is water vapour. If it is 100%, then it means either the sensor is not correct, the sensor is broken/damaged, the Arduino crashed, the Arduino can't receive any signal, there's an error in the code or you're underwater(1). If it's 0%, it means all the reasons above except the last one, you're in space or you're in the middle of a desert(2).
 
 (1) Correction: it means the air cannot hold any more water.
 (2) The air in a desert does contain some water but it is a very little amount compared to a normal place. The Sahara Desert has a mean humidity of 25%.
@@ -64,9 +64,9 @@ Wire the [DHT11](https://amzn.to/2Qs9fcV) sensor to the [Arduino Uno](https://am
 LCD Screen - Schematic Diagram
 ------------------------------
 
-The LCD display needs six Arduino pins, all set to be digital outputs. It also needs 5V and GND connections.
+The LCD needs six Arduino pins, all set to be digital outputs. It also needs 5V and GND connections.
 
-There are a number of connections to be made. Lining up the display with the top of the breadboard helps to identify its pins without too much counting, especially if the breadboard has its rows numbered with row 1 as the top row of the board. Do not forget, the long yellow lead that links the slider of the pot to pin 3 of the display. The potentiometer is used to control the contrast of the display.
+There are several connections to be made. Lining up the display with the top of the breadboard helps to identify its pins without too much counting, especially if the breadboard has its rows numbered with row 1 as the top row of the board. Do not forget, the long yellow lead that links the slider of the pot to pin 3 of the display. The potentiometer is used to control the contrast of the display.
 
 <img align="center" src="https://github.com/MecaHumArduino/arduino-uno-aws-weather-station/blob/master/docs/lcd-schema.png?raw=true" style="max-width:100%;" height="600">
 
