@@ -3,7 +3,7 @@
 PROJECT ARCHITECTURE
 --------------------------
 
-<img align="center" src="https://github.com/MecaHumArduino/arduino-uno-aws-weather-station/blob/master/docs/architecture-diagram.png?raw=true" style="max-width:100%;" height="500">
+<img align="center" src="https://github.com/MecaHumArduino/arduino-uno-aws-weather-station/blob/master/docs/architecture-diagram.png?raw=true" style="max-width:100%;" height="350">
 
 This repo accompanies the "Connected Weather Station" YouTube series. it contains the code, library, diagrams, and more information that I promised in the videos.
 
