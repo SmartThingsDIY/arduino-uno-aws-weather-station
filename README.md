@@ -35,9 +35,10 @@ This episode builds on the previous one and continues forward by pushing the tem
 🖥 APPS
 ------
 
-*   [PlatformIO](https://platformio.org/)
-*   [Fritzing](https://fritzing.org/)
+*   [VSCode](https://code.visualstudio.com/)
 *   [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
+*   [Fritzing](https://fritzing.org/)
+*   [PlatformIO](https://platformio.org/)
 
 📦 Libraries
 ---------
