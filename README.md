@@ -1,10 +1,18 @@
 # Connected Weather Station with Arduino Uno board, DHT11 Sensor, LCD screen, ESP8266 WiFi module and AWS IOT
 
-This tutorial shows you how to use the [DHT11](https://amzn.to/2Qs9fcV) temperature and humidity sensors with the [Arduino Uno](https://amzn.to/2RnHhPY) board to build a simple weather station that displays current temperature and humidity on an [LCD](https://amzn.to/2FzJdT6) screen and pushes the data to AWS IoT through an [ESP8266](https://amzn.to/3hqqWom) board.
+This repo accompanies the "Connected Weather Station" YouTube series. it contains the code, library, diagrams, and more information that I promised in the videos.
 
-In the **first part**, we'll go through a quick introduction to the sensor, pinout, wiring diagram, and finally the Arduino sketch.
+Video 1: Building an IoT Weather Station with Arduino, DHT11, and LCD Screen
+------------------------
+This episode shows you how to use the [DHT11](https://amzn.to/2Qs9fcV) temperature and humidity sensors with the [Arduino Uno](https://amzn.to/2RnHhPY) board to build a weather station that displays current temperature and humidity on an [LCD](https://amzn.to/2FzJdT6) screen.
 
-In the **second part**, WIP...
+[<img align="center" src="https://github.com/MecaHumArduino/arduino-uno-aws-weather-station/blob/master/docs/01.png?raw=true" style="max-width:100%;" height="350">](https://youtu.be/vL6TKYhjwQc)
+
+Video 2: Connecting the IoT Weather Station to AWS IoT using ESP8266
+------------------------
+This episode builds on the previous one and continues forward by pushing the temperature & humidity data received through the [DHT11](https://amzn.to/2Qs9fcV) sensor, onto an AWS IoT account using an [ESP8266](https://amzn.to/3hqqWom) WiFi module.
+
+[<img align="center" src="https://github.com/MecaHumArduino/arduino-uno-aws-weather-station/blob/master/docs/02.png?raw=true" style="max-width:100%;" height="350">](https://youtu.be/aR3pAWPbU1Q)
 
 PART ONE
 ========
