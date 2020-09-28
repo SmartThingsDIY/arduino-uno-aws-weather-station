@@ -17,15 +17,13 @@ PART ONE
 
 *   [Arduino Uno](https://amzn.to/2RnHhPY)
 *   [LCD Screen](https://amzn.to/2FzJdT62Ehh2ru)
-*   [Breadboard](https://amzn.to/2Ei40tP)
-*   [Jumper Wires](https://amzn.to/2Ehh2ru)
-*   [Male to Male Jumper Wires + Tweezer](https://amzn.to/3jcf9eX)
+*   [Breadboard](https://amzn.to/2Ei40tP) - [Jumper Wires](https://amzn.to/2Ehh2ru) - [Male to Male Jumper Wires + Tweezer](https://amzn.to/3jcf9eX)
 *   [DHT11 Temp & Humidity Sensor](https://amzn.to/2Qs9fcV)
 *   [10k Ohm resistor](https://amzn.to/2Qo7vkW)
 *   [Hardware / Storage Cabinet Drawer](https://amzn.to/36ehDpB)
 *   [ESP8266 ESP-01 WiFi Module](https://amzn.to/30fUWNS)
 *   [ESP8266 ESP-01 programmable USB](https://amzn.to/345egi6)
-*   [ESP8266 ESP-01 Breakout Board Breadboard Adapter](https://amzn.to/3kSFVcP)
+*   [ESP8266 ESP-01 Breadboard Adapter](https://amzn.to/3kSFVcP)
 
 APPS
 ------
@@ -71,3 +69,10 @@ The LCD display needs six Arduino pins, all set to be digital outputs. It also n
 There are a number of connections to be made. Lining up the display with the top of the breadboard helps to identify its pins without too much counting, especially if the breadboard has its rows numbered with row 1 as the top row of the board. Do not forget, the long yellow lead that links the slider of the pot to pin 3 of the display. The potentiometer is used to control the contrast of the display.
 
 <img align="center" src="https://github.com/MecaHumArduino/arduino-uno-aws-weather-station/blob/master/docs/lcd-schema.png?raw=true" style="max-width:100%;" height="600">
+
+ESP8266 ESP01 - Schematic Diagram
+------------------------------
+
+The ESP8266 WiFi Module is a self-contained stack that can give any microcontroller access to your WiFi network. The ESP8266 is capable of either hosting an application or offloading all Wi-Fi networking functions from another application processor. The ESP8266 module is an extremely cost-effective board with a huge, and ever-growing, community.
+
+<img align="center" src="https://github.com/MecaHumArduino/arduino-uno-aws-weather-station/blob/master/docs/esp8266-schema.png?raw=true" style="max-width:100%;" height="350">
