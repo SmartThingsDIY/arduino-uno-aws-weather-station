@@ -123,5 +123,5 @@ Pin 3 is then used to read any response coming back from the WiFi board through 
 ```
 
 Next Step
-------------------------------
+---------
 For code that goes into the WiFi board (ESP8266 ESP01) and more explanation, please head out to this repo: https://github.com/MecaHumArduino/esp8266-01-aws-mqtt
