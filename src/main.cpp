@@ -5,21 +5,23 @@
   @version 3.0
 */
 
-#include <Arduino.h>
 #include <DHT.h>
-#include <LiquidCrystal.h>
+#include <Arduino.h>
 #include <ArduinoJson.h> // https://github.com/bblanchon/ArduinoJson (use v6.xx)
+#include <LiquidCrystal.h>
 #include <SoftwareSerial.h>
+#include "Adafruit_SI1145.h"
 
 #define DEBUG true
 
 #define DHT_PIN 4 // pin connected to data pin of DHT11
 #define DHT_TYPE DHT11  // Type of the DHT Sensor, DHT11/DHT22
 
-DHT sensor(DHT_PIN, DHT_TYPE);
-
 // initialize the library with the numbers of the interface pins
 LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
+
+DHT temperatureSensor(DHT_PIN, DHT_TYPE);
+Adafruit_SI1145 uvSensor = Adafruit_SI1145();
 
 // ESP TX => Uno Pin 2
 // ESP RX => Uno Pin 3
@@ -27,7 +29,7 @@ SoftwareSerial wifi(2, 3);
 
 // **************
 String sendDataToWiFiBoard(String command, const int timeout, boolean debug);
-String prepareDataForWiFi(float humidity, float temperature, float heatIndex);
+String prepareDataForWiFi(float humidity, float temperature, float heatIndex, float uvIndex);
 void setup();
 void loop();
 // **************
@@ -39,13 +41,14 @@ void loop();
  * @param heatIndex
  * @return
  */
-String prepareDataForWiFi(float humidity, float temperature, float heatIndex)
+String prepareDataForWiFi(float humidity, float temperature, float heatIndex, float uvIndex)
 {
   StaticJsonDocument<200> doc;
 
   doc["humidity"]    = String(humidity);
   doc["temperature"] = String(temperature);
   doc["heat_index"]  = String(heatIndex);
+  doc["uv_index"]    = String(uvIndex);
 
   char jsonBuffer[512];
   serializeJson(doc, jsonBuffer);
@@ -87,6 +90,12 @@ void setup() {
   Serial.begin(9600);
   wifi.begin(9600);
 
+
+  if (!uvSensor.begin()) {
+    Serial.println("Didn't find Si1145");
+    while (1);
+  }
+
   // set up the LCD's number of columns and rows
   lcd.begin(16, 2);
 
@@ -125,13 +134,17 @@ void loop() {
   }
 
   // read from the digital pin
-  sensor.begin();
+  temperatureSensor.begin();
 
-  float temperature = sensor.readTemperature(); // return temperature in °C
-  float humidity    = sensor.readHumidity(); // return humidity in %
+  float temperature = temperatureSensor.readTemperature(); // return temperature in °C
+  float humidity    = temperatureSensor.readHumidity(); // return humidity in %
+  float uvIndex     = uvSensor.readUV(); // the index is multiplied by 100 so to get the
+  // integer index, divide by 100!
+  uvIndex /= 100.0;
 
   // Compute heat index in Celsius (isFahrenheit = false)
-  float heatIndex   = sensor.computeHeatIndex(temperature, humidity, false);
+  float heatIndex   = temperatureSensor.computeHeatIndex(temperature, humidity, false);
+
 
   // check whether reading was successful or not
   if (temperature == NAN || humidity == NAN) { // NAN means no available data
@@ -147,7 +160,7 @@ void loop() {
     lcd.print("Temp (C): ");
     lcd.print(String(temperature));
 
-    String preparedData = prepareDataForWiFi(humidity, temperature, heatIndex);
+    String preparedData = prepareDataForWiFi(humidity, temperature, heatIndex, uvIndex);
     if (DEBUG == true) {
       Serial.println(preparedData);
     }
