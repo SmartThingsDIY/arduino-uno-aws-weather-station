@@ -90,12 +90,6 @@ void setup() {
   Serial.begin(9600);
   wifi.begin(9600);
 
-
-  if (!uvSensor.begin()) {
-    Serial.println("Didn't find Si1145");
-    while (1);
-  }
-
   // set up the LCD's number of columns and rows
   lcd.begin(16, 2);
 
@@ -103,14 +97,19 @@ void setup() {
   lcd.setCursor(0, 0);
 
   // display a welcome message
-  lcd.print("Temp & Humidity");
+  lcd.print("Temp, Humidity");
   // go to second line
   lcd.setCursor(0, 1);
-  lcd.print("Sensor");
+  lcd.print("and UV Sensor");
 
   lcd.blink();
   delay(3000);
   lcd.noBlink();
+
+  if (!uvSensor.begin()) {
+    Serial.println("Didn't find Si1145");
+    while (1);
+  }
 }
 
 void loop() {
@@ -139,6 +138,7 @@ void loop() {
   float temperature = temperatureSensor.readTemperature(); // return temperature in °C
   float humidity    = temperatureSensor.readHumidity(); // return humidity in %
   float uvIndex     = uvSensor.readUV(); // the index is multiplied by 100 so to get the
+
   // integer index, divide by 100!
   uvIndex /= 100.0;
 
@@ -159,6 +159,11 @@ void loop() {
     lcd.setCursor(0, 1);
     lcd.print("Temp (C): ");
     lcd.print(String(temperature));
+
+    // display UVIndex on the LCD screen
+    lcd.setCursor(0, 2);
+    lcd.print("UV: ");
+    lcd.print(String(uvIndex));
 
     String preparedData = prepareDataForWiFi(humidity, temperature, heatIndex, uvIndex);
     if (DEBUG == true) {
