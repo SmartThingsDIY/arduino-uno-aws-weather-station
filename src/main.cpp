@@ -105,11 +105,6 @@ void setup() {
   lcd.blink();
   delay(3000);
   lcd.noBlink();
-
-  if (!uvSensor.begin()) {
-    Serial.println("Didn't find Si1145");
-    while (1);
-  }
 }
 
 void loop() {
@@ -132,19 +127,21 @@ void loop() {
     Serial.println(" endbuffer");
   }
 
-  // read from the digital pin
+  // read from DHT11
   temperatureSensor.begin();
+
+  if (!uvSensor.begin()) {
+    Serial.println("Didn't find Si1145");
+  }
 
   float temperature = temperatureSensor.readTemperature(); // return temperature in °C
   float humidity    = temperatureSensor.readHumidity(); // return humidity in %
+  // Compute heat index in Celsius (isFahrenheit = false)
+  float heatIndex   = temperatureSensor.computeHeatIndex(temperature, humidity, false);
   float uvIndex     = uvSensor.readUV(); // the index is multiplied by 100 so to get the
 
   // integer index, divide by 100!
   uvIndex /= 100.0;
-
-  // Compute heat index in Celsius (isFahrenheit = false)
-  float heatIndex   = temperatureSensor.computeHeatIndex(temperature, humidity, false);
-
 
   // check whether reading was successful or not
   if (temperature == NAN || humidity == NAN) { // NAN means no available data
