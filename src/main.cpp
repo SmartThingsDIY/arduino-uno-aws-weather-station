@@ -148,16 +148,15 @@ void loop() {
     // display Humidity on the LCD screen
     lcd.setCursor(0, 0);
     lcd.print("Humidity:");
-    lcd.print(String(humidity) + "%");
+    lcd.print(String(int(humidity)) + "%  ");
 
     // display Temperature on the LCD screen
     lcd.setCursor(0, 1);
     lcd.print("Temp:");
-    lcd.print(String(temperature) + "C");
+    lcd.print(String(int(temperature)) + "C");
 
     // display UVIndex on the LCD screen
-    // lcd.setCursor(0, 2);
-    lcd.print(" - UV:");
+    lcd.print(" UV:");
     lcd.print(String(uvIndex));
 
     String preparedData = prepareDataForWiFi(humidity, temperature, heatIndex, uvIndex);
