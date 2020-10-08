@@ -57,14 +57,14 @@ Humidity is the water vapour around you mixed with air. It is measured in %. So,
 (1) Correction: it means the air cannot hold any more water.
 (2) The air in a desert does contain some water but it is a very little amount compared to a normal place. The Sahara Desert has a mean humidity of 25%.
 
-<img align="right" src="https://github.com/MecaHumArduino/arduino-uno-aws-weather-station/blob/master/docs/dht11.jpeg?raw=true" style="max-width:100%;" height="350">
+<img align="right" src="https://github.com/MecaHumArduino/arduino-uno-aws-weather-station/blob/master/docs/dht11.jpeg?raw=true" style="max-width:100%;" height="250">
 
 How to measure Temperature & Humidity
 -------------------------------------
 
-To the right, is a [DHT11](https://amzn.to/2Qs9fcV) sensor, it is a temperature and humidity combined sensor with calibrated digital signal output. It's is a reliable sensor for determining temperature and humidity. There is a newer and more accurate module on the market called DHT22 but we will stick with the DHT11 for this demo
+To the right, is a [DHT11](https://amzn.to/2Qs9fcV) sensor, it is a temperature and humidity combined sensor with calibrated digital signal output. It's is a reliable sensor for determining temperature and humidity. There is a newer and more accurate module on the market called DHT22 but we will stick with the DHT11 for this demo<br><br>
 
-<img align="left" src="https://github.com/MecaHumArduino/arduino-uno-aws-weather-station/blob/master/docs/uvsensor.jpg?raw=true" style="max-width:100%;" height="250">
+<img align="left" src="https://github.com/MecaHumArduino/arduino-uno-aws-weather-station/blob/master/docs/uvsensor.jpg?raw=true" style="max-width:100%;" height="100">
 
 How to measure UV Light
 -------------------------------------
