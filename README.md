@@ -71,13 +71,6 @@ How to measure UV Light
 
 UV sensors like the [GUVA-S12SD](https://amzn.to/3jP4JCA) to the left, are Ultraviolet testers and outdoor ultraviolet detectors that use calibrated light sensing algorithms that can calculate UV Index. This type of sensors don't contain an actual UV sensing element, instead they approximate it based on visible & IR light from the sun
 
-DHT11 - Schematic Diagram
--------------------------
-
-Wire the [DHT11](https://amzn.to/2Qs9fcV) sensor to the [Arduino Uno](https://amzn.to/2RnHhPY) development board as shown in the following schematic diagram.
-
-<img align="center" src="https://github.com/MecaHumArduino/arduino-uno-aws-weather-station/blob/master/docs/dht11-wiring.png?raw=true" style="max-width:100%;" height="600">
-
 LCD Screen - Schematic Diagram
 ------------------------------
 
@@ -87,7 +80,15 @@ There are several connections to be made. Lining up the display with the top of 
 
 <img align="center" src="https://github.com/MecaHumArduino/arduino-uno-aws-weather-station/blob/master/docs/lcd-schema.png?raw=true" style="max-width:100%;" height="600">
 
-ESP8266 ESP01 - Schematic Diagram
+Adding the DHT11 to the Schematic Diagram
+-------------------------
+
+Wire the [DHT11](https://amzn.to/2Qs9fcV) sensor to the [Arduino Uno](https://amzn.to/2RnHhPY) development board as shown in the following schematic diagram.
+
+<img align="center" src="https://github.com/MecaHumArduino/arduino-uno-aws-weather-station/blob/master/docs/dht11-wiring.png?raw=true" style="max-width:100%;" height="600">
+
+
+Adding the ESP8266 ESP01 to the Schematic Diagram
 ------------------------------
 
 The ESP8266 WiFi Module is a self-contained stack that can give any microcontroller access to your WiFi network. The ESP8266 is capable of either hosting an application or offloading all Wi-Fi networking functions from another application processor. The ESP8266 module is an extremely cost-effective board with a huge, and ever-growing, community.
