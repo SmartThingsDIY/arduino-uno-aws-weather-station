@@ -10,18 +10,17 @@
 #include <ArduinoJson.h> // https://github.com/bblanchon/ArduinoJson (use v6.xx)
 #include <LiquidCrystal.h>
 #include <SoftwareSerial.h>
-#include "Adafruit_SI1145.h"
 
 #define DEBUG true
 
 #define DHT_PIN 4 // pin connected to data pin of DHT11
 #define DHT_TYPE DHT11  // Type of the DHT Sensor, DHT11/DHT22
+int uvAnalogIn = A0;
 
 // initialize the library with the numbers of the interface pins
 LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
 
 DHT temperatureSensor(DHT_PIN, DHT_TYPE);
-Adafruit_SI1145 uvSensor = Adafruit_SI1145();
 
 // ESP TX => Uno Pin 2
 // ESP RX => Uno Pin 3
@@ -87,6 +86,9 @@ String sendDataToWiFiBoard(String command, const int timeout, boolean debug)
 }
 
 void setup() {
+  // read from GUVA-S12SD
+  pinMode(uvAnalogIn, INPUT);
+
   Serial.begin(9600);
   wifi.begin(9600);
 
@@ -130,15 +132,11 @@ void loop() {
   // read from DHT11
   temperatureSensor.begin();
 
-  if (!uvSensor.begin()) {
-    Serial.println("Didn't find Si1145");
-  }
-
   float temperature = temperatureSensor.readTemperature(); // return temperature in °C
   float humidity    = temperatureSensor.readHumidity(); // return humidity in %
   // Compute heat index in Celsius (isFahrenheit = false)
   float heatIndex   = temperatureSensor.computeHeatIndex(temperature, humidity, false);
-  float uvIndex     = uvSensor.readUV(); // the index is multiplied by 100 so to get the
+  float uvIndex     = analogRead(uvAnalogIn);
 
   // integer index, divide by 100!
   uvIndex /= 100.0;
@@ -149,17 +147,17 @@ void loop() {
   } else {
     // display Humidity on the LCD screen
     lcd.setCursor(0, 0);
-    lcd.print("Humidity (%): ");
-    lcd.print(String(humidity));
+    lcd.print("Humidity:");
+    lcd.print(String(humidity) + "%");
 
     // display Temperature on the LCD screen
     lcd.setCursor(0, 1);
-    lcd.print("Temp (C): ");
-    lcd.print(String(temperature));
+    lcd.print("Temp:");
+    lcd.print(String(temperature) + "C");
 
     // display UVIndex on the LCD screen
-    lcd.setCursor(0, 2);
-    lcd.print("UV: ");
+    // lcd.setCursor(0, 2);
+    lcd.print(" - UV:");
     lcd.print(String(uvIndex));
 
     String preparedData = prepareDataForWiFi(humidity, temperature, heatIndex, uvIndex);
