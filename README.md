@@ -1,4 +1,4 @@
-# Connected Weather Station with Arduino Uno board, DHT11 Sensor, LCD screen, ESP8266 WiFi module and AWS IOT
+# Connected Weather Station with Arduino Uno board, DHT11 Sensor, UV Sensor, LCD screen, ESP8266 WiFi module and AWS IOT
 
 PROJECT ARCHITECTURE
 --------------------------
@@ -14,6 +14,9 @@ This episode shows you how to use the [DHT11](https://amzn.to/2Qs9fcV) temperatu
 [**Video 2: Connecting the IoT Weather Station to AWS IoT using ESP8266**](https://youtu.be/aR3pAWPbU1Q)
 This episode builds on the previous one and continues forward by pushing the temperature & humidity data received through the [DHT11](https://amzn.to/2Qs9fcV) sensor, onto an AWS IoT account using an [ESP8266](https://amzn.to/3hqqWom) WiFi module.
 
+[**Video 3: Adding a UV sensor to the weather station**](https://youtu.be/aR3pAWPbU1Q)
+This episode builds on the previous two and show how to add a [UV](https://amzn.to/3jP4JCA) sensor to the weather station.
+
 
 ⚡️ COMPONENTS AND SUPPLIES
 --------------------------
@@ -24,6 +27,7 @@ This episode builds on the previous one and continues forward by pushing the tem
 *   [LCD Screen](https://amzn.to/2FzJdT62Ehh2ru)
 *   [Breadboard](https://amzn.to/2Ei40tP) - [Jumper Wires](https://amzn.to/2Ehh2ru) - [Male to Male Jumper Wires + Tweezer](https://amzn.to/3jcf9eX)
 *   [DHT11 Temp & Humidity Sensor](https://amzn.to/2Qs9fcV)
+*   [UV Sensor GUVA-S12SD](https://amzn.to/3jP4JCA)
 *   [10k Ohm resistor](https://amzn.to/2Qo7vkW)
 *   [Hardware / Storage Cabinet Drawer](https://amzn.to/36ehDpB)
 *   [ESP8266 ESP-01 WiFi Module](https://amzn.to/30fUWNS)
