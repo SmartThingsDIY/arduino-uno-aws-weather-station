@@ -1,4 +1,4 @@
-# Connected Weather Station with Arduino Uno board, DHT11 Sensor, UV Sensor, LCD screen, ESP8266 WiFi module and AWS IOT
+# Connected Weather Station with Arduino to measure Temperature, Humidity, Heat Index and UV light
 
 PROJECT ARCHITECTURE
 --------------------------
@@ -15,7 +15,7 @@ This episode shows you how to use the [DHT11](https://amzn.to/2Qs9fcV) temperatu
 This episode builds on the previous one and continues forward by pushing the temperature & humidity data received through the [DHT11](https://amzn.to/2Qs9fcV) sensor, onto an AWS IoT account using an [ESP8266](https://amzn.to/3hqqWom) WiFi module.
 
 [**Video 3: Adding a UV sensor to the weather station**](https://youtu.be/aR3pAWPbU1Q)
-This episode builds on the previous two and show how to add a [UV](https://amzn.to/3jP4JCA) sensor to the weather station.
+This episode builds on the previous two and show how to add a [UV Light](https://amzn.to/3jP4JCA) sensor to the weather station.
 
 
 ⚡️ COMPONENTS AND SUPPLIES
@@ -63,6 +63,13 @@ How to measure Temperature & Humidity
 -------------------------------------
 
 To the right, is a [DHT11](https://amzn.to/2Qs9fcV) sensor, it is a temperature and humidity combined sensor with calibrated digital signal output. It's is a reliable sensor for determining temperature and humidity. There is a newer and more accurate module on the market called DHT22 but we will stick with the DHT11 for this demo
+
+<img align="left" src="https://github.com/MecaHumArduino/arduino-uno-aws-weather-station/blob/master/docs/uvsensor.jpg?raw=true" style="max-width:100%;" height="250">
+
+How to measure UV Light
+-------------------------------------
+
+UV sensors like the [GUVA-S12SD](https://amzn.to/3jP4JCA) to the left, are Ultraviolet testers and outdoor ultraviolet detectors that use calibrated light sensing algorithms that can calculate UV Index. This type of sensors don't contain an actual UV sensing element, instead they approximate it based on visible & IR light from the sun
 
 DHT11 - Schematic Diagram
 -------------------------
