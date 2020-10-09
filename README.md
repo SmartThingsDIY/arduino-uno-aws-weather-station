@@ -14,8 +14,8 @@ This episode shows you how to use the [DHT11](https://amzn.to/2Qs9fcV) temperatu
 [**Video 2: Connecting the IoT Weather Station to AWS IoT using ESP8266**](https://youtu.be/aR3pAWPbU1Q)
 This episode builds on the previous one and continues forward by pushing the temperature & humidity data received through the [DHT11](https://amzn.to/2Qs9fcV) sensor, onto an AWS IoT account using an [ESP8266](https://amzn.to/3hqqWom) WiFi module.
 
-[**Video 3: Adding a UV sensor to the weather station**](https://youtu.be/aR3pAWPbU1Q)
-This episode builds on the previous two and show how to add a [UV Light](https://amzn.to/3jP4JCA) sensor to the weather station.
+[**Video 3: Adding a UV sensor to the weather station**](https://youtu.be/YlprYKokXfs)
+This episode builds on the previous two and shows how to add a [UV Light](https://amzn.to/3jP4JCA) sensor to the weather station.
 
 
 ⚡️ COMPONENTS AND SUPPLIES
@@ -69,7 +69,7 @@ To the right, is a [DHT11](https://amzn.to/2Qs9fcV) sensor, it is a temperature 
 How to measure UV Light
 -------------------------------------
 
-UV sensors like the [GUVA-S12SD](https://amzn.to/3jP4JCA) to the left, are Ultraviolet testers and outdoor ultraviolet detectors that use calibrated light sensing algorithms that can calculate UV Index. This type of sensors don't contain an actual UV sensing element, instead they approximate it based on visible & IR light from the sun
+UV sensors like the [GUVA-S12SD](https://amzn.to/3jP4JCA) to the left, are Ultraviolet testers and outdoor ultraviolet detectors that use calibrated light sensing algorithms that can calculate UV Index. This type of sensors don't contain an actual UV sensing element, instead they approximate it based on visible & IR light from the sun. This particular sensor measures ambient ultraviolet intensity in the 200 to 370 nanometer range, including solar ultraviolet UVA, UVB, and UVC light. This UV Sensor also provides a built-in amplifier with adjustable levels
 
 LCD Screen - Schematic Diagram
 ------------------------------
