@@ -138,8 +138,9 @@ void loop() {
   float heatIndex   = temperatureSensor.computeHeatIndex(temperature, humidity, false);
   float uvIndex     = analogRead(uvAnalogIn);
 
-  // integer index, divide by 100!
-  uvIndex /= 100.0;
+  // divide by 10: This value will depend on the
+  // sensor and the library used, if any
+  uvIndex /= 10.0;
 
   // check whether reading was successful or not
   if (temperature == NAN || humidity == NAN) { // NAN means no available data
